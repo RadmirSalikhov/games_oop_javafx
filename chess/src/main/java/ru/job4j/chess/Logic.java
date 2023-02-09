@@ -2,6 +2,7 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+
 import java.util.Arrays;
 
 public final class Logic {
@@ -21,6 +22,13 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for (Figure figure : figures) {
+            if (figure != null) {
+                if (Arrays.asList(steps).contains(figure.position())) {
+                    throw new OccupiedCellException("There are other figures on steps");
+                }
+            }
+        }
         return true;
     }
 
